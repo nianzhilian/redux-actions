@@ -1,0 +1,22 @@
+
+.search label{
+    margin-right: 15px;
+}
+.search button{
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    background: #ddd;
+    cursor: pointer;
+}
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.table tr, .table td,.table th{
+    border: 1px solid #ddd;
+    line-height: 35px;
+    text-align: center;
+}

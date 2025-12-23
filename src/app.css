@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.nav{
+}
+.nav a{
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.nav a.active{
+    color:lightcoral
+}
+.main{
+    width: 400px;
+    margin: 0 auto;
+}
+
+.header{
+    background: lightblue;
+    line-height: 50px;
+    font-size: 1.2em;
+    text-align: center;
+    position: fixed;
+    height: 50px;
+    width: 400px;
+    top: 0;
+    left: 50%;
+    margin-left: -200px;
+}
+.transition-group{
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+}
+.route-transition{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform .3s ease;
+}
+/* 核心：合并动画类和布局样式，确保动画类作用到元素上 */
+.css-transition-enter,
+.page,
+.css-transition-enter-active,
+.css-transition-exit,
+.css-transition-exit-active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.css-transition-enter{
+    transform: translateX(100%);
+    opacity: 0;
+}
+.css-transition-enter-active{
+    transform: translateX(0);
+    opacity: 1;
+}
+.css-transition-exit{
+    transform: translateX(0);
+    opacity: 1;
+}
+.css-transition-exit-active{
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.page{
+    background:lightgoldenrodyellow;
+    text-align: center;
+}
+.page.admin{
+    background: lightgreen;
+}

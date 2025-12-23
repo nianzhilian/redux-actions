@@ -1,0 +1,25 @@
+.pager{
+    margin-top: 20px;
+    color: #fff;
+}
+.pager a{
+    color: inherit;
+    text-decoration: none;
+    background: #262323;
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+.pager a.disabled{
+    background: #ddd;
+    cursor:not-allowed;
+}
+.pager span{
+    color: #262323;
+}
+.pager a.active{
+    background: #e42798;
+}

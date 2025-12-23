@@ -1,0 +1,9 @@
+.header-div{
+    padding: 0 20px;
+}
+.header-div .left{
+    float: left;
+}
+.header-div .right{
+    float: right;
+}
