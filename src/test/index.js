@@ -5,6 +5,9 @@ import {
 } from "redux";
 // import { thunk } from "redux-thunk";
 import { bindActionCreators, thunk } from "../redux";
+// import createSagaMiddleware from '../redux-saga'
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from "./saga";
 import * as actions from './redux-actions/actionsGeneratorFn'
 import rootReducers from './redux-actions'
 
@@ -29,13 +32,13 @@ const logger1 = (store) => (next) => (action) => {
 //中间件聚合 最终 store.dispatch   指的是 applyMiddleware 中 第一个 中间件产生的dispatch生成器
 //每一次dispatch 都会首先执行 thunk中的中间件链条
 
-// const sagaMid = createSagaMiddleware();
-// window.sagaMid = sagaMid;
+const sagaMid = createSagaMiddleware();
+window.sagaMid = sagaMid;
 window.store = createStore(
   rootReducers,
-  composeEnhancers(applyMiddleware(thunk, logger1))
+  composeEnhancers(applyMiddleware(sagaMid,thunk, logger1))
 );
 //开启一个saga任务
-// sagaMid.run(rootSaga2);
+sagaMid.run(rootSaga);
 console.log(actions)
 window.bindTest = bindActionCreators(actions, window.store.dispatch);

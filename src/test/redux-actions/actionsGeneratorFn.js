@@ -1,3 +1,3 @@
-export {incress,dincress} from './counter'
+export {incress,dincress,asyncIncress,asyncDincress} from './counter'
 export {setSearch} from './users/search'
-export {setTotal,setLoading,setDatas} from './users/result'
+export {setTotal,setLoading,setDatas,fetchStudents} from './users/result'

@@ -10,27 +10,22 @@ import {
   call,
   race
 } from "redux-saga/effects";
-import { actionTypes, dincrease, increase } from "../redux/actions";
+import * as actions from '../redux-actions/counter/actionTypes'
+import { incress,dincress } from "../redux-actions/counter";
 
-function* task(){
-    while(true){
-        let res = yield take(actionTypes.AUTO_INCRESS);
-        console.log(res)
-        yield race({
-            autoIncress:call(function*(){
-                while(true){
-                    yield delay(5000);
-                    yield put(increase())
-                }
-            }),
-            cancle:take(actionTypes.STOP_INCRESS)
-        })
-        console.log('这里会立马执行吗')
-    }
+function* asyncIncress(){
+    yield delay(2000);
+    yield put(incress())
 }
 
-//谁先完成则返回谁 类似与 promise.race
+function* asyncDincress(){
+    yield delay(2000);
+    yield put(dincress())
+}
+
 export default function* (){
-   yield fork(task);
-   console.log('监听autoIncress')
+    //监听异步增
+   yield takeEvery(actions.ASYNC_INCRESS,asyncIncress)
+   //监听异步减
+   yield takeEvery(actions.ASYNC_DINCRESS,asyncDincress)
 } 
