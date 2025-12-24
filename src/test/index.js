@@ -34,11 +34,13 @@ const logger1 = (store) => (next) => (action) => {
 
 const sagaMid = createSagaMiddleware();
 window.sagaMid = sagaMid;
-window.store = createStore(
+const store = createStore(
   rootReducers,
   composeEnhancers(applyMiddleware(sagaMid,thunk, logger1))
 );
+window.store = store;
 //开启一个saga任务
 sagaMid.run(rootSaga);
 console.log(actions)
 window.bindTest = bindActionCreators(actions, window.store.dispatch);
+export default store;
