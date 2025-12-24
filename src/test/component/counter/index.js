@@ -1,5 +1,5 @@
-import React from 'react'
-import store from '../..';  
+import React from 'react' 
+import { connect } from '../../../react-redux';
 import { incress,dincress, asyncDincress, asyncIncress } from '../../redux-actions/counter';
 export function Counter(props){
     return (
@@ -19,7 +19,7 @@ const mapStateToProps = (state)=>{
     }
 }
 
-const mapDiapatchToProps = (dispatch)=>{
+const mapDispatchToProps = (dispatch)=>{
     return {
         onAsyncDincress:function(){
             dispatch(asyncDincress())
@@ -35,24 +35,24 @@ const mapDiapatchToProps = (dispatch)=>{
         },
     }
 }
+//只要存在就会被js解释器所解析 会解析整个文件的语法和检查变量的引用
+// function withHoc(Component){
+//     class Temp extends React.Component{
+//         constructor(props){
+//             super(props);
+//             this.state = mapStateToProps(store.getState());
+//             store.subscribe(()=>{
+//                 this.setState(mapStateToProps(store.getState()))
+//             })
+//         }
+//         render(){
+//             const handles = mapDiapatchToProps(store.dispatch);
+//             return (
+//                 <Component {...this.state} {...handles} />
+//             )
+//         }
+//     }
+//     return Temp;
+// }
 
-function withHoc(Component){
-    class Temp extends React.Component{
-        constructor(props){
-            super(props);
-            this.state = mapStateToProps(store.getState());
-            store.subscribe(()=>{
-                this.setState(mapStateToProps(store.getState()))
-            })
-        }
-        render(){
-            const handles = mapDiapatchToProps(store.dispatch);
-            return (
-                <Component {...this.state} {...handles} />
-            )
-        }
-    }
-    return Temp;
-}
-
-export default withHoc(Counter);
+export default connect(mapStateToProps,mapDispatchToProps)(Counter);
