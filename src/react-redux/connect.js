@@ -1,32 +1,34 @@
-import React from "react";
+import React,{useState,useEffect,useContext} from "react";
 import ctx from "./context";
 
 function connect(mapStateToProps,mapDispatchToProps) {
   return function (Component) {
-    return class extends React.Component {
-      static contextType = ctx;
-      getEventHandlers(){
-        return mapDispatchToProps(this.store.dispatch);
-      }
-      constructor(props,context) {
-        super(props,context);
-        this.store = this.context;
-        this.state = mapStateToProps(this.store.getState())
-        this.handles = this.getEventHandlers();
-        this.unlistens = this.store.subscribe(()=>{
-          this.setState(mapStateToProps(this.store.getState()))
+    function Temp(props){
+      const store = useContext(ctx);
+      const [state, setstate] = useState(()=>{
+        return mapStateToProps && mapStateToProps(store.getState());
+      })
+      useEffect(() => {
+        const unlistener = store.subscribe(()=>{
+          setstate(mapStateToProps && mapStateToProps(store.getState()))
         })
+        return () => {
+          //取消订阅
+          unlistener && unlistener();
+        };
+      }, [store]);
+
+      function getEvents(){
+        return mapDispatchToProps(store.dispatch);
       }
-      componentWillUnmount(){
-        //组件卸载 清除监听
-        if(this.unlistens){
-          this.unlistens();
-        }
+      let handles = {};
+      if(mapDispatchToProps){
+        handles = getEvents();
       }
-      render() {
-        return <Component {...this.state} {...this.handles} />;
-      }
-    };
+      return <Component {...state} {...handles} />
+    }
+    Temp.displayName = Component.displayName || Component.name;
+    return Temp;
   };
 }
 

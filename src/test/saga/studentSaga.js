@@ -7,8 +7,7 @@ function* fetchStudents(){
     yield put(setLoading(true));
     const condation = yield select((state)=>{
         return {
-            ...state.users.search,
-            current:2
+            ...state.users.search
         }
     });
    const res = yield call(fetchUserList,condation);
@@ -19,5 +18,4 @@ function* fetchStudents(){
 
 export default function*(){
    let res = yield takeEvery(stuActions.FETCH_STUDENTS,fetchStudents);
-   console.log(res)
 }

@@ -32,6 +32,7 @@ function getMax(min, totalPage, props) {
 }
 
 function Pager(props) {
+  console.log('pager渲染了------------------------')
   const pageNum = getPageNum(props);
   if (pageNum == 0) {
     return null;

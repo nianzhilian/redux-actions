@@ -12,7 +12,7 @@ export { setSearch };
 
 const searchReducer =  handleActions(
   {
-    [[types.SET_SEARCH]]: (state, {type,payload}) => {
+    [types.SET_SEARCH]: (state, {type,payload}) => {
       return {...state,...payload}
     },
   },

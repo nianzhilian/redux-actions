@@ -6,8 +6,6 @@ const service = axios.create({
     timeout:60000
 })
 
-console.log(service)
-
 service.interceptors.request.use(config=>{
     const token = window.localStorage.getItem('userToken') || window.sessionStorage.getItem('userToken');
     config.headers = {
@@ -17,14 +15,12 @@ service.interceptors.request.use(config=>{
         config.headers._tokenKey = token;
         config.headers['X-Requested-With'] = true;
     }
-    console.log(config)
     return config;
 },error=>{
     return Promise.reject(error);
 })
 
 service.interceptors.response.use(response=>{
-    console.log(response);
     return response;
 },error=>{
     return Promise.reject(error);
