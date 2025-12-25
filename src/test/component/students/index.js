@@ -1,17 +1,18 @@
 import React from 'react'
-import { connect } from '../../../react-redux';
-// import { connect } from 'react-redux';
+// import { connect } from '../../../react-redux';
+import { connect } from 'react-redux';
 import {setSearch} from '../../redux-actions/users/search'
-import ctx from '../../../react-redux/context';
+// import ctx from '../../../react-redux/context';
 import { fetchStudents } from '../../redux-actions/users/result'
 import Search from '../../../page/student/Search';
 import  StuTable from '../../../page/student/StuTable'
 import Pager from '../../../components/Pager'
-let mapStateToProps = (state)=>{
-    return {
-        defaultValue:state.users.search
-    }
-}
+import store from '../..';
+let mapStateToProps = (state)=>({
+    current:1,
+    pageSize:15,
+    type:4 
+})
 
 let mapDispatchToProps = (dispatch)=>{
     return {
@@ -65,10 +66,9 @@ mapDispatchToProps = (dispatch)=>{
 
 const PagerContainer = connect(mapStateToProps,mapDispatchToProps)(Pager);
 class StudentsContainer extends React.Component{
-    static contextType = ctx;
-    constructor(props,context){
-        super(props,context);
-        this.store = this.context;
+    constructor(props){
+        super(props);
+        this.store = store;
     }
     componentDidMount(){
         this.store.dispatch(fetchStudents());

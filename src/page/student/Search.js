@@ -1,12 +1,16 @@
 import React from "react";
 
-export default class Search extends React.Component {
+export default class Search extends React.PureComponent {
   constructor(props) {
     super(props);
     const obj = {
         packType:-1
     }
-    this.state = Object.assign({},obj,this.props.defaultValue)
+    this.state = Object.assign({},obj,{
+      current:this.props.current,
+      pageSize:this.props.pageSize,
+      type:this.props.type
+    })
     this.radioChange = this.radioChange.bind(this)
   }
   //这种写法是实例方法

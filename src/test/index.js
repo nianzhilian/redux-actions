@@ -1,5 +1,5 @@
 import {
-  legacy_createStore as createStore,
+  createStore,
   compose,
   applyMiddleware,
 } from "redux";
