@@ -22,7 +22,6 @@ export default class Search extends React.Component {
     this.props.onChange && this.props.onChange(+value);
   }
   render() {
-    console.log('search渲染')
     return (
       <div className="search">
         <label>

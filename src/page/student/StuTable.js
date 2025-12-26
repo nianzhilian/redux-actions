@@ -2,12 +2,15 @@ import React from 'react'
 //只需要运行一次该模块不做任何的导入操作
 import './index.css'
 
-class StuTable extends React.Component {
+class StuTable extends React.PureComponent {
   constructor(props) {
     super(props);
   }
+  componentDidMount(){
+    console.log('student组件挂载完毕')
+  }
   render() {
-    console.log('stuTable渲染了---')
+    console.log('stuTable渲染了---',this.props.lists)
     const trs = this.props.lists.map((item) => (
       <tr key={item.logId}>
         <td>{item.fileName}</td>

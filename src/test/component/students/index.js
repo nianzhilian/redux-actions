@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from '../../../react-redux';
-// import { connect } from 'react-redux';
 import {setSearch} from '../../redux-actions/users/search'
 import ctx from '../../../react-redux/context';
 import { fetchStudents } from '../../redux-actions/users/result'
 import Search from '../../../page/student/Search';
 import  StuTable from '../../../page/student/StuTable'
-import Pager from '../../../components/Pager'
+import MemoPager from '../../../components/Pager'
 let mapStateToProps = (state)=>{
     return {
         defaultValue:state.users.search
@@ -63,7 +62,7 @@ mapDispatchToProps = (dispatch)=>{
     }
 }
 
-const PagerContainer = connect(mapStateToProps,mapDispatchToProps)(Pager);
+const PagerContainer = connect(mapStateToProps,mapDispatchToProps)(MemoPager);
 class StudentsContainer extends React.Component{
     static contextType = ctx;
     constructor(props,context){
@@ -71,10 +70,11 @@ class StudentsContainer extends React.Component{
         this.store = this.context;
     }
     componentDidMount(){
+        console.log('父组件挂载完毕了')
         this.store.dispatch(fetchStudents());
     }
     render(){
-        console.log("StudentsContainer组件重新渲染了")
+        console.log('父组件渲染了')
         return (
             <>
             <SearchContainer />
