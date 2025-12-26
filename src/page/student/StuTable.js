@@ -7,7 +7,7 @@ class StuTable extends React.Component {
     super(props);
   }
   render() {
-    console.log('stuTable渲染了---')
+    console.log('stuTable渲染了---',this.props.lists)
     const trs = this.props.lists.map((item) => (
       <tr key={item.logId}>
         <td>{item.fileName}</td>

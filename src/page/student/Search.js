@@ -6,11 +6,12 @@ export default class Search extends React.PureComponent {
     const obj = {
         packType:-1
     }
-    this.state = Object.assign({},obj,{
-      current:this.props.current,
-      pageSize:this.props.pageSize,
-      type:this.props.type
-    })
+    // this.state = Object.assign({},obj,{
+    //   current:this.props.current,
+    //   pageSize:this.props.pageSize,
+    //   type:this.props.type
+    // })
+    this.state = Object.assign({},obj,this.props.defaultValue)
     this.radioChange = this.radioChange.bind(this)
   }
   //这种写法是实例方法
