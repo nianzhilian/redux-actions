@@ -10,9 +10,10 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./saga";
 import * as actions from './redux-actions/actionsGeneratorFn'
 import rootReducers from './redux-actions'
-
+import { routerMiddleware } from "connected-react-router";
+import history from "./history";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+const routeMid = routerMiddleware(history);
 const logger1 = (store) => (next) => (action) => {
   console.log(
     "%c变化前的数据",
@@ -36,7 +37,7 @@ const sagaMid = createSagaMiddleware();
 window.sagaMid = sagaMid;
 const store = createStore(
   rootReducers,
-  composeEnhancers(applyMiddleware(sagaMid,thunk))
+  composeEnhancers(applyMiddleware(routeMid,sagaMid,thunk))
 );
 window.store = store;
 //开启一个saga任务
